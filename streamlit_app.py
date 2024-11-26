@@ -37,7 +37,7 @@ CODE[LABELS_COL] = LOG.index.map(gene_to_cluster).astype(int)
 continuous_features = ["RNA_CV", "VAE_RMSE", "VAE_Sc"]
 
 # Streamlit app layout
-st.set_page_config(layout="wide")  # Enable wide layout
+st.set_page_config(layout="wide")
 
 st.title("Gene Visualization in VAE 6D Latent Space")
 
