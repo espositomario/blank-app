@@ -61,7 +61,7 @@ filtered_data = CODE[(CODE[selected_feature] >= color_min) & (CODE[selected_feat
 # Calculate the number of selected genes
 num_selected_genes = filtered_data.shape[0]
 total_genes = CODE.shape[0]
-scatter_title = f"UMAP 2D Projection ({num_selected_genes}/{total_genes} genes selected)"
+scatter_title = f"({num_selected_genes}/{total_genes} genes selected)"
 
 # Layout for scatter plot and violin plot
 col1, col2 = st.columns(2)
@@ -99,15 +99,14 @@ with col1:
     # Adjust plot appearance
     fig.update_traces(marker=dict(size=point_size))  # Adjust point size
     fig.update_layout(
-        xaxis=dict(scaleanchor="y"),  # Enforce 1:1 aspect ratio
-        yaxis=dict(scaleanchor="x"),
+ 
         xaxis_showgrid=False,  # No gridlines
         yaxis_showgrid=False,
         xaxis_tickvals=[],  # Hide tick labels
         yaxis_tickvals=[],
         plot_bgcolor="white",
-        autosize=False,
-        width=500,  # Fixed width
+        autosize=True,
+        width=300,  # Fixed width
         height=500  # Fixed height for a square layout
     )
     st.plotly_chart(fig, use_container_width=True)
@@ -145,11 +144,22 @@ with col2:
 
     # Adjust plot appearance
     box_violin_fig.update_layout(
-        title=f"{selected_feature} Distribution",
+        title="",
         yaxis_title=selected_feature,
         xaxis=dict(showticklabels=False),  # Hide x-axis ticks
         plot_bgcolor="white",
         showlegend=False
     )
     
-    st.plotly_chart(box_violin_fig, use_container_width=True)
+    box_violin_fig.update_layout(
+ 
+        xaxis_showgrid=False,  # No gridlines
+        yaxis_showgrid=True,
+
+        plot_bgcolor="white",
+        autosize=True,
+        width=300,  # Fixed width
+        height=600  # Fixed height for a square layout
+    )
+
+    st.plotly_chart(box_violin_fig, use_container_width=False)
